@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   name: 'my_graphql',
@@ -10,13 +11,20 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   entry: [
-    './client/index.js'
+    './client/index.js',
+    './client/common.css'
   ],
   output: {
-    path: path.join(__dirname, '/client/public/dist'),
+    path: path.join(__dirname, '/client/dist'),
     filename: 'app.js',
-    publicPath: '/client/public/dist',
+    publicPath: '/client/dist',
   },
+  plugins:[
+    new MiniCssExtractPlugin({ filename: 'app.css' }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, "/client/index.html"),
+    }),
+  ],
   module: {
     rules: [
       {
@@ -39,7 +47,7 @@ module.exports = {
       },
       {
         loader: 'file-loader',
-        exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+        exclude: [/\.(css|js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
         options: {
           name: '/static/[name].[ext]',
         },
@@ -58,9 +66,6 @@ module.exports = {
       }
     ],
   },
-  plugins:[
-    new MiniCssExtractPlugin({ filename: 'app.css' })
-  ],
   resolve: {
     alias: {
       Components: path.resolve( __dirname, 'client/components')
@@ -71,5 +76,6 @@ module.exports = {
     port: 4000,
     historyApiFallback: true,
     hot: true,
+    contentBase: path.join(__dirname, "/client/dist"),
   },
 };
