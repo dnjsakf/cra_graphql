@@ -1,5 +1,3 @@
-"# cra_graphql" 
-
 Client
 # 1. Package Install
 ## $ node install
