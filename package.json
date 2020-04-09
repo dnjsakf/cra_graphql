@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx webpack-dev-server --hot –open",
-    "build": "npx webpack"
+    "dev": "npx webpack-dev-server --hot --open --config ./webpack.config.dev.js",
+    "build": "npx webpack --config ./webpack.config.prod.js"
   },
   "author": "",
   "license": "ISC",

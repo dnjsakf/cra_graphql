@@ -1,5 +1,9 @@
 from flask import Flask
+from flask_graphql import GraphQLView
+
+from api.graphql.schema import schema
 from api.config.middlewares import PrefixMiddleware
+
 
 def index_page(app):
   from flask import render_template
@@ -21,6 +25,15 @@ def create_app(env="dev", prefix=None):
     static_folder="../client/public",
     template_folder="../client/public",
     instance_path="C:/Users/14D00944/Desktop/python/my_graphql"
+  )
+  
+  app.add_url_rule(
+      '/graphql',
+      view_func=GraphQLView.as_view(
+          'graphql',
+          schema=schema,
+          graphiql=True # for having the GraphiQL interface
+      )
   )
   
   if prefix is not None:

@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify
+from flask_graphql import GraphQLView
 
 app = Blueprint('sample', __name__)
 
