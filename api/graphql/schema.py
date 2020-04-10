@@ -4,6 +4,8 @@ from graphene_mongo import MongoengineConnectionField, MongoengineObjectType
 from api.graphql.models import Department as DepartmentModel
 from api.graphql.models import Employee as EmployeeModel
 from api.graphql.models import Role as RoleModel
+from api.graphql.models import GameRanking as GameRankingModel
+
 
 class Department(MongoengineObjectType):
 
@@ -25,11 +27,17 @@ class Employee(MongoengineObjectType):
         model = EmployeeModel
         interfaces = (Node,)
 
+class GameRanking(MongoengineObjectType):
+
+    class Meta:
+        model = GameRankingModel
+        interfaces = (Node,)
 
 class Query(graphene.ObjectType):
     node = Node.Field()
     all_employees = MongoengineConnectionField(Employee)
     all_role = MongoengineConnectionField(Role)
     role = graphene.Field(Role)
+    ranking = MongoengineConnectionField(GameRanking)
 
-schema = graphene.Schema(query=Query, types=[Department, Employee, Role])
+schema = graphene.Schema(query=Query, types=[Department, Employee, Role, GameRanking])

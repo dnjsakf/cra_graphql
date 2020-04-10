@@ -1,0 +1,14 @@
+{
+  ranking {
+    edges {
+      node {
+        id,
+        name,
+        mode,
+        score,
+        isMobile,
+        regDttm
+      }
+    }
+  }
+}
