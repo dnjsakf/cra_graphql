@@ -20,9 +20,9 @@ class Employee(Document):
     role = ReferenceField(Role)
 
 class GameRanking(Document):
-  meta = {'collection': 'game_ranking'}
-  name = StringField()
-  mode = StringField()
-  score = IntField()
-  reg_dttm = StringField()
-  isMobile = BooleanField()
+    meta = {'collection': 'game_ranking'}
+    name = StringField()
+    mode = StringField()
+    score = IntField()
+    reg_dttm = StringField()
+    isMobile = BooleanField()

@@ -31,5 +31,14 @@ def init_db():
     tracy = Employee(name="Tracy", department=hr, role=manager)
     tracy.save()
 
-    rank = GameRanking(name="heo", mode="4x4", score=10, isMobile=False, reg_dttm="20200401170848")
+    rank = GameRanking(name="heo", mode="4x4", score=16, isMobile=False, reg_dttm="20200401170848")
+    rank.save()
+
+    rank = GameRanking(name="heo", mode="4x4", score=2, isMobile=False, reg_dttm="20200401170848")
+    rank.save()
+
+    rank = GameRanking(name="heo", mode="4x4", score=128, isMobile=False, reg_dttm="20200401170848")
+    rank.save()
+
+    rank = GameRanking(name="heo", mode="4x4", score=1024, isMobile=False, reg_dttm="20200401170848")
     rank.save()

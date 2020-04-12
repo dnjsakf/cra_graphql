@@ -6,7 +6,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   name: 'my_graphql',
   mode: 'development',
-  devtool: 'eval',
+  // devtool: 'eval',
+  devtool: 'inline-source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
@@ -77,5 +78,11 @@ module.exports = {
     historyApiFallback: true,
     hot: true,
     contentBase: path.join(__dirname, "/client/dist"),
+    proxy: {
+      '/graphql': {
+        target: 'http://localhost:3001/api/graphql',
+        secure: false,
+      },
+    },
   },
 };

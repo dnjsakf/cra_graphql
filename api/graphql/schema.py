@@ -28,14 +28,24 @@ class GameRanking(MongoengineObjectType):
     model = GameRankingModel
     interfaces = (Node,)
 
-  def resolve_reg_dttm(parent, info):
+  @classmethod
+  def resolve_reg_dttm(cls, parent, info):
     return datetime.strptime(parent.reg_dttm, "%Y%m%d%H%M%S").strftime("%Y-%m-%d %H:%M:%S")
 
 class Query(graphene.ObjectType):
   node = Node.Field()
+
   all_employees = MongoengineConnectionField(Employee)
   all_role = MongoengineConnectionField(Role)
   role = graphene.Field(Role)
-  ranking = MongoengineConnectionField(GameRanking)
+
+  all_ranking = graphene.List(GameRanking, mode=graphene.String(required=True))
+  rank = graphene.Field(GameRanking, mode=graphene.String(required=True))
+
+  def resolve_all_ranking(self, info, mode):
+    return GameRankingModel.objects(mode=mode)
+
+  def resolve_rank(self, info, id):
+    return GameRankingModel.objects.get(id=id)
 
 schema = graphene.Schema(query=Query, types=[Department, Employee, Role, GameRanking])

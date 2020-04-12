@@ -22,3 +22,11 @@ Server
 #
 # 4. Run Server
 ## .venv)$ python server.py
+
+
+/** Apollo Docs **/
+https://www.apollographql.com/docs/react/networking/authentication/
+
+
+/** graphene-python **/
+https://docs.graphene-python.org/projects/django/en/latest/queries/
