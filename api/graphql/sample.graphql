@@ -1,0 +1,59 @@
+# Find All
+query {
+  ranks(mode: "4x4"){
+    id
+    name
+    score
+    isMobile
+    regDttm
+    __typename
+  }
+}
+
+# Find One
+query {
+  rank(
+    id: "5e93c8df3bcd76846a5d11e6"
+  ){
+    id
+    name
+    score
+    isMobile
+    regDttm
+    __typename
+  }
+}
+
+# Insert Mutation
+mutation {
+  insertRank(
+    data: {mode: "4x4", name: "kang", score: 10, isMobile: false}
+  ){
+    name
+    score
+    isMobile
+    regDttm
+    __typename
+  }
+}
+
+# Update Mutation
+mutation {
+  updateRank(mode: "4x4", name: "kang", score: 102, isMobile: true){
+    rank {
+      __typename
+      name
+      score
+      isMobile
+      regDttm
+    },
+    success
+  }
+}
+
+# Delete Mutation
+mutation {
+  deleteRank(mode: "4x4", name: "kang"){
+    success
+  }
+}

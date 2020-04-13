@@ -1,28 +1,25 @@
 from datetime import datetime
+
 from mongoengine import Document
-from mongoengine.fields import (
-    DateTimeField, ReferenceField, StringField, BooleanField, IntField
-)
+from mongoengine.fields import StringField, BooleanField, IntField
 
-class Department(Document):
-    meta = {'collection': 'department'}
-    name = StringField()
+from graphene_mongo import MongoengineObjectType
 
-class Role(Document):
-    meta = {'collection': 'role'}
-    name = StringField()
+# Models
+class RankModel(Document):
+  meta = {'collection': 'game_ranking'}
+  mode = StringField()
+  name = StringField()
+  score = IntField()
+  isMobile = BooleanField()
+  reg_dttm = StringField()
+  upd_dttm = StringField()
+  
 
-class Employee(Document):
-    meta = {'collection': 'employee'}
-    name = StringField()
-    hired_on = DateTimeField(default=datetime.now)
-    department = ReferenceField(Department)
-    role = ReferenceField(Role)
+# ObjectTypes
+class RankType(MongoengineObjectType):
+  class Meta:
+    model = RankModel
 
-class GameRanking(Document):
-    meta = {'collection': 'game_ranking'}
-    name = StringField()
-    mode = StringField()
-    score = IntField()
-    reg_dttm = StringField()
-    isMobile = BooleanField()
+  def resolve_reg_dttm(parent, info, **kwargs):
+    return datetime.strptime(parent.reg_dttm, "%Y%m%d%H%M%S").strftime("%Y-%m-%d %H:%M:%S")
