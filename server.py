@@ -8,4 +8,4 @@ if __name__ == "__main__":
   init_db()
   
   app = create_app("dev", prefix="/api")
-  app.run(host="localhost", port=3001)
+  app.run(host="localhost", port=3000)

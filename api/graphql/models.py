@@ -1,4 +1,6 @@
-from datetime import datetime
+import datetime
+
+from graphene.relay import Node
 
 from mongoengine import Document
 from mongoengine.fields import StringField, BooleanField, IntField
@@ -11,7 +13,7 @@ class RankModel(Document):
   mode = StringField()
   name = StringField()
   score = IntField()
-  isMobile = BooleanField()
+  is_mobile = BooleanField()
   reg_dttm = StringField()
   upd_dttm = StringField()
   
@@ -20,6 +22,7 @@ class RankModel(Document):
 class RankType(MongoengineObjectType):
   class Meta:
     model = RankModel
+    interfaces = (Node,)
 
   def resolve_reg_dttm(parent, info, **kwargs):
-    return datetime.strptime(parent.reg_dttm, "%Y%m%d%H%M%S").strftime("%Y-%m-%d %H:%M:%S")
+    return datetime.datetime.strptime(parent.reg_dttm, "%Y%m%d%H%M%S").strftime("%Y-%m-%d %H:%M:%S")

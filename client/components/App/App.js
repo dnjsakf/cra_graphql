@@ -20,7 +20,7 @@ const App = (props) => {
               return (
                 <ul>
                 {
-                  data.allRanking.map(node=>{
+                  data.ranks.map(node=>{
                   return <li key={ node.id }>{ node.name }/{ node.regDttm }</li>
                   })
                 }

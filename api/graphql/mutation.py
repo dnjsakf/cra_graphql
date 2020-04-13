@@ -7,7 +7,7 @@ class RankInupt(graphene.InputObjectType):
   mode = graphene.String(required=True)
   name = graphene.String(required=True)
   score = graphene.Int(required=True)
-  isMobile = graphene.Boolean(required=True)
+  is_mobile = graphene.Boolean(required=True)
   reg_dttm = graphene.String(default_value=datetime.now().strftime("%Y%m%d%H%M%S"))
 
 class InsertRank(graphene.Mutation):
@@ -23,7 +23,7 @@ class InsertRank(graphene.Mutation):
       mode=data.mode,
       name=data.name,
       score=data.score,
-      isMobile=data.isMobile,
+      is_mobile=data.is_mobile,
       reg_dttm=data.reg_dttm
     )
     model.save()
@@ -39,16 +39,16 @@ class UpdateRank(graphene.Mutation):
     mode = graphene.String(required=True)
     name = graphene.String(required=True)
     score = graphene.Int()
-    isMobile = graphene.Boolean()
+    is_mobile = graphene.Boolean()
 
-  def mutate(root, info, mode, name, score=None, isMobile=None,):
+  def mutate(root, info, mode, name, score=None, is_mobile=None,):
     model = RankModel.objects(mode=mode, name=name).first()
     
     if score is not None:
       model.score = score
     
-    if isMobile is not None:
-      model.isMobile = isMobile
+    if is_mobile is not None:
+      model.is_mobile = is_mobile
       
     model.save()
     
